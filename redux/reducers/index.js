@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import math from './math';
+import todo from './todo';
  
 const rootReducer = combineReducers({
-    math
+    math,
+    todo
 });
  
 export default rootReducer;
