@@ -21,36 +21,62 @@ class Screen2 extends React.Component {
   }
 
   removeTodo(index) {
-    this.props.onRemoveTodo(this.props.todo,index);
+    this.props.onRemoveTodo(this.props.todo, index);
   }
 
   render() {
     return (
       <View style={styles.container}>
-          
+
         <FlatList
           data={this.props.todo}
-          renderItem={(todo) => 
-            <View>
-              <TouchableOpacity onPress={() => this.removeTodo(todo.index) } >
-                  <Text style={{ margin: 20 }} >{this.props.todo[todo.index].text}</Text>
+          renderItem={(todo) =>
+            <View style={styles.todo_container}>
+              <TouchableOpacity onPress={() => this.removeTodo(todo.index)} style={styles.todo_title} >
+                <Text style={{ }} >{this.props.todo[todo.index].text}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.removeTodo(todo.index)} style={styles.delete_button}>
+                <Text style={{ textAlign: "center", margin:10, color: "white" }} >Delete</Text>
               </TouchableOpacity>
             </View>
           }
         />
 
         <Button onPress={() => this.addTodo()} title="ADD"></Button>
-      
+
       </View>
-      );
-    }
+    );
   }
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#eaeaeaea',
     marginTop: 50
+  },
+  todo_container: {
+    flex: 1,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 5,
+    marginBottom: 5,
+    borderRadius: 5
+    
+  },
+  todo_title: {
+    flex: 3,
+    justifyContent: 'center',
+    marginLeft: 10
+  },
+  delete_button: {
+    flex: 1,
+    backgroundColor: '#ed5e68',
+    borderRadius: 5,
+    alignSelf: 'flex-end',
+    margin: 8
   }
 });
 
@@ -61,11 +87,11 @@ const mapStateToProps = (state, ownProps) => {
     todo: state.todo.todo
   };
 }
- 
+
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddTodo: (todo) => { dispatch(addTodo(todo)); },
-    onRemoveTodo: (todo,index) => { dispatch(removeTodo(todo,index)); },
+    onRemoveTodo: (todo, index) => { dispatch(removeTodo(todo, index)); },
   }
 }
 
