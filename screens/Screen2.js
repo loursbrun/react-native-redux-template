@@ -8,7 +8,7 @@ import {
   Button
 } from 'react-native';
 import { connect } from 'react-redux';
-import { addTodo, removeTodo } from '../redux/actions/todo';
+import { addTodo, removeTodo, toggleTodo } from '../redux/actions/todo';
 
 
 class Screen2 extends React.Component {
@@ -24,6 +24,10 @@ class Screen2 extends React.Component {
     this.props.onRemoveTodo(this.props.todo, index);
   }
 
+  toggleTodo(index) {
+    this.props.onToggleTodo(this.props.todo, index);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -32,7 +36,7 @@ class Screen2 extends React.Component {
           data={this.props.todo}
           renderItem={(todo) =>
             <View style={styles.todo_container}>
-              <TouchableOpacity onPress={() => this.removeTodo(todo.index)} style={styles.todo_title} >
+              <TouchableOpacity onPress={() => this.toggleTodo(todo.index)} style={styles.todo_title} >
                 <Text style={{ }} >{this.props.todo[todo.index].text}</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => this.removeTodo(todo.index)} style={styles.delete_button}>
@@ -92,6 +96,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAddTodo: (todo) => { dispatch(addTodo(todo)); },
     onRemoveTodo: (todo, index) => { dispatch(removeTodo(todo, index)); },
+    onToggleTodo: (todo, index) => { dispatch(toggleTodo(todo, index)); },
   }
 }
 

@@ -34,6 +34,10 @@ export default function reducer(state = defaultState, action) {
             return Object.assign({}, state, {
                 todo: action.todo
             });
+        case 'TOGGLETODO':
+            return Object.assign({}, state, {
+                todo: action.todo
+            });
 
         default:
             return state;

@@ -15,11 +15,18 @@ export const addTodo = (todo) => {
     }
 };
 
-
 export const removeTodo = (todo,index) => {
-    console.log("Index :::::" + index)
+    console.log("Remove Index :::::" + index)
     return {
         type: 'REMOVETODO',
+        todo: todo.slice(0, index).concat(todo.slice(index + 1, todo.length))
+    }
+};
+
+export const toggleTodo = (todo,index) => {
+    console.log("Toogle Index :::::" + index)
+    return {
+        type: 'TOGGLETODO',
         todo: todo.slice(0, index).concat(todo.slice(index + 1, todo.length))
     }
 };
