@@ -16,6 +16,8 @@ class Screen2 extends React.Component {
     header: null,
   };
 
+
+
   addTodo() {
     this.props.onAddTodo(this.props.todo);
   }
@@ -29,18 +31,23 @@ class Screen2 extends React.Component {
   }
 
   render() {
+   
     return (
       <View style={styles.container}>
 
         <FlatList
           data={this.props.todo}
           renderItem={(todo) =>
-            <View style={styles.todo_container}>
+            <View
+              style={
+                this.props.todo[todo.index].selected ? [styles.todo_container, styles.selected] : styles.todo_container
+              }
+            >
               <TouchableOpacity onPress={() => this.toggleTodo(todo.index)} style={styles.todo_title} >
-                <Text style={{ }} >{this.props.todo[todo.index].text}</Text>
+                <Text style={{}} >{this.props.todo[todo.index].text}</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => this.removeTodo(todo.index)} style={styles.delete_button}>
-                <Text style={{ textAlign: "center", margin:10, color: "white" }} >Delete</Text>
+                <Text style={{ textAlign: "center", margin: 10, color: "white" }} >Delete</Text>
               </TouchableOpacity>
             </View>
           }
@@ -68,7 +75,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
     borderRadius: 5
-    
+  },
+  selected: {
+    backgroundColor: 'green',
   },
   todo_title: {
     flex: 3,
