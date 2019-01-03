@@ -5,7 +5,8 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  Button
+  Button,
+  TextInput
 } from 'react-native';
 import { connect } from 'react-redux';
 import { addTodo, removeTodo, toggleTodo } from '../redux/actions/todo';
@@ -15,11 +16,15 @@ class Screen2 extends React.Component {
   static navigationOptions = {
     header: null,
   };
+  constructor(props) {
+    super(props);
+    this.state = { text: '' };
+  }
 
-
-
-  addTodo() {
-    this.props.onAddTodo(this.props.todo);
+  addTodo(text) {
+    if (text != '') {
+      this.props.onAddTodo(this.props.todo, text);
+    }
   }
 
   removeTodo(index) {
@@ -31,7 +36,7 @@ class Screen2 extends React.Component {
   }
 
   render() {
-   
+
     return (
       <View style={styles.container}>
 
@@ -52,8 +57,11 @@ class Screen2 extends React.Component {
             </View>
           }
         />
-
-        <Button onPress={() => this.addTodo()} title="ADD"></Button>
+        <TextInput
+          placeholder="New task"
+          onChangeText={(text) => this.setState({ text })}
+        />
+        <Button onPress={() => this.addTodo(this.state.text)} title="ADD"></Button>
 
       </View>
     );
@@ -103,7 +111,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddTodo: (todo) => { dispatch(addTodo(todo)); },
+    onAddTodo: (todo, text) => { dispatch(addTodo(todo, text)); },
     onRemoveTodo: (todo, index) => { dispatch(removeTodo(todo, index)); },
     onToggleTodo: (todo, index) => { dispatch(toggleTodo(todo, index)); },
   }
