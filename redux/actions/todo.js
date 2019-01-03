@@ -14,10 +14,14 @@ export const addTodo = (todo) => {
 };
 
 export const removeTodo = (todo, index) => {
-    let newTodoArray = todo.slice()
+    let newTodoArray = todo.slice(0, index).concat(todo.slice(index + 1, todo.length))
+    for (let i = 0; i < newTodoArray.length; i++) {
+        newTodoArray[i] = { key: i.toString(), text: newTodoArray[i].text, completed: newTodoArray[i].completed, selected: newTodoArray[i].selected }
+    }
+
     return {
         type: 'REMOVETODO',
-        todo: newTodoArray.slice(0, index).concat(newTodoArray.slice(index + 1, newTodoArray.length))
+        todo: newTodoArray
     }
 };
 
