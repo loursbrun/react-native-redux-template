@@ -58,6 +58,7 @@ class Screen2 extends React.Component {
           }
         />
         <TextInput
+        style={styles.textInput}
           placeholder="New task"
           onChangeText={(text) => this.setState({ text })}
         />
@@ -98,6 +99,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignSelf: 'flex-end',
     margin: 8
+  },
+  textInput: {
+    width: '100%',
+    padding: 10,
+    borderTopWidth: 1,
+    borderColor: 'grey',
+    backgroundColor: 'white'
   }
 });
 
