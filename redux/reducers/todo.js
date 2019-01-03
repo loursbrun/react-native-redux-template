@@ -8,7 +8,7 @@ const defaultState = {
         key: '1',
         text: 'Exercise',
         completed: false,
-        selected: true
+        selected: false
     }, {
         key: '2',
         text: 'Sport',

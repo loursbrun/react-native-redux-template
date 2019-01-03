@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   selected: {
-    backgroundColor: 'green',
+    backgroundColor: '#5fd080',
   },
   todo_title: {
     flex: 3,

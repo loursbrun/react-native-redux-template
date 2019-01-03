@@ -1,10 +1,8 @@
 export const addTodo = (todo) => {
-    console.log("new index : " + todo.length.toString())
-    console.log("last index : " + todo[todo.length - 1].key)
-    console.log("last index : " + (parseInt(todo[todo.length - 1].key) + 1).toString())
+    let newTodoArray = todo.slice()
     return {
         type: 'ADDTODO',
-        todo: [...todo,
+        todo: [...newTodoArray,
         {
             key: todo.length.toString(),
             text: 'Finnalllllllle',
@@ -16,23 +14,26 @@ export const addTodo = (todo) => {
 };
 
 export const removeTodo = (todo, index) => {
-    console.log("Remove Index :::::" + index)
+    let newTodoArray = todo.slice()
     return {
         type: 'REMOVETODO',
-        todo: todo.slice(0, index).concat(todo.slice(index + 1, todo.length))
+        todo: newTodoArray.slice(0, index).concat(newTodoArray.slice(index + 1, newTodoArray.length))
     }
 };
 
 export const toggleTodo = (todo, index) => {
-    for (let i = 0; i < todo.length; i++) {
-            todo[i] = { key: todo[i].key, text: todo[i].text, completed: todo[i].completed, selected: false }
+
+    let newTodoArray = todo.slice()
+
+    for (let i = 0; i < newTodoArray.length; i++) {
+        newTodoArray[i] = { key: newTodoArray[i].key, text: newTodoArray[i].text, completed: newTodoArray[i].completed, selected: false }
         if (i === index) {
-            todo[index] = { key: todo[index].key, text: todo[index].text, completed: todo[index].completed, selected: true }
+            newTodoArray[index] = { key: newTodoArray[index].key, text: newTodoArray[index].text, completed: newTodoArray[index].completed, selected: true }
         }
     }
     return {
         type: 'TOGGLETODO',
-        todo: todo
+        todo: newTodoArray
     }
 };
 
